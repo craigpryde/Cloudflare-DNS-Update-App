@@ -5,63 +5,66 @@ const fetchARecords = require("./modules/fetchARecords").fetchARecords;
 const fetchZones = require("./modules/fetchZones").fetchZones;
 const updateDNSRecord = require("./modules/updateDNSRecord").updateDNSRecord;
 
+/** 
+ * Function used to handle updating DNS A Records on cloudflare for specified domains.
+ * @function
+ * @example
+ * // Fetch's Local IPV4
+ * // -> Loops through domains.
+ * // -> Retrieves Zones
+ * // -> Fetches A Records
+ * // -> Updates Record If Required.
+ */
+const dnsUpdate = () => {
+    retrieveIPV4()
+    .then((ip) => {
 
+        domains.forEach((currentDomain) => {
 
-retrieveIPV4()
-.then((ip) => {
-    console.log("HIT", domains);
-    domains.forEach((currentDomain) => {
+            fetchZones({ domain: currentDomain })
+            .then((domainZones) => {
 
-        fetchZones({ domain: currentDomain })
-        .then((domainZones) => {
+                domainZones.forEach((currentZone) => {
 
-            console.log(domainZones);
+                    fetchARecords({ zone: currentZone })
+                    .then((records) => {
 
-            domainZones.forEach((currentZone) => {
+                        records.forEach((currentRecord) => {
 
-            console.log(currentZone);
+                            if(currentRecord.content !== ip) {
+                                updateDNSRecord({ 
+                                    zone: currentZone, 
+                                    recordId: currentRecord.id,
+                                    type: currentRecord.type,
+                                    name: currentRecord.name,
+                                    content: ip
+                                })
+                                .then((success) => {
+                                    if(!success) {
+                                        console.log("An Error occured updating the DNS record.");
+                                    }
+                                    else {
+                                        console.log("Updated record", currentRecord.name);
+                                    }
+                                })
+                                .catch((error) => console.log(error));                      
+                            }
 
+                        });
 
-                fetchARecords({ zone: currentZone })
-                .then((records) => {
+                    })
+                    .catch((error) => console.log(error));
 
-                    console.log(records);
+                });
 
-                    records.forEach((currentRecord) => {
+            })
+            .catch((error) => console.log(error));
+        });
 
-                        if(currentRecord.content !== ip) {
-                             // Update the DNS
-                             updateDNSRecord({ 
-                                zone: currentZone, 
-                                recordId: currentRecord.id,
-                                type: currentRecord.type,
-                                name: currentRecord.name,
-                                content: ip
-                            })
-                            .then((success) => {
-                                if(!success) {
-                                    console.log("An Error occured updating the DNS record.");
-                                }
-                                else {
-                                    console.log("Updated record", currentRecord.name);
-                                }
-                            })
-                            .catch((error) => console.log(error));                      
-                        }
-
-                    });
-
-                })
-                .catch((error) => console.log(error));
-
-            });
-
-        })
-        .catch((error) => console.log(error));
     });
+}
 
-});
-
+dnsUpdate();
 
 
 

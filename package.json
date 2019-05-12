@@ -1,14 +1,29 @@
 {
-    "name": "ddns_script",
+    "name": "cloudflare-dns-update-app",
     "version": "1.0.0",
-    "description": "DDNS Script for Cloud Flare",
-    "main": "index.js",
-    "repository": "https://gitlab.com/craigpryde/Digital-Ocean-DDNS-Script.git",
-    "author": "Craig Pryde",
+    "description": "App developed to be used with the linux cron to sync A records of domains with a non-static IP. Combat's the DDNS issue's with ISP's",
+    "main": "dns_update.js",
+    "author": "Craig Pryde (https://github.com/craigpryde)",
+    "keywords": [
+        "server",
+        "DDNS",
+        "Cloudflare",
+        "Domains"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/craigpryde/Cloudflare-DNS-Update-App"
+    },
+    "bugs": {
+        "url": "https://github.com/craigpryde/Cloudflare-DNS-Update-App/issues"
+    },
     "license": "MIT",
+    "engines": {
+        "node": ">=8"
+    },
+    "scripts": {},
     "dependencies": {
       "axios": "0.18.0",
       "public-ip": "3.0.0"
     }
   }
-  

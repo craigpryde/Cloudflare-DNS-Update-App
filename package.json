@@ -1,0 +1,14 @@
+{
+    "name": "ddns_script",
+    "version": "1.0.0",
+    "description": "DDNS Script for Cloud Flare",
+    "main": "index.js",
+    "repository": "https://gitlab.com/craigpryde/Digital-Ocean-DDNS-Script.git",
+    "author": "Craig Pryde",
+    "license": "MIT",
+    "dependencies": {
+      "axios": "0.18.0",
+      "public-ip": "3.0.0"
+    }
+  }
+  

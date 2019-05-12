@@ -1,4 +1,9 @@
-export const updateDNSRecord = ({ zone, recordId, type, name, content }) => {
+/* Dependencies */
+const createAxios = require("./config").createAxios;
+
+const axios = createAxios();
+
+const updateDNSRecord = ({ zone, recordId, type, name, content }) => {
     return new Promise((resolve, reject) => {
         const request = axios.put(`zones/${zone}/dns_records/${recordId}`, {
             type,
@@ -15,3 +20,5 @@ export const updateDNSRecord = ({ zone, recordId, type, name, content }) => {
         });
     });
 }
+
+exports.updateDNSRecord = updateDNSRecord;

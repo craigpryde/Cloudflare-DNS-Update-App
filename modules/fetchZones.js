@@ -1,3 +1,8 @@
+/* Dependencies */
+const createAxios = require("./config").createAxios;
+
+const axios = createAxios();
+
 /**
  * Function used to return all zones for a domain name.
  * @param {Object} param0 - Object containing passed in values.
@@ -9,7 +14,7 @@
  * // Log out zones
  * getZones.then((zones) => console.log(zones));
  */
-export const fetchZones = ({ domain }) => {
+const fetchZones = ({ domain }) => {
     return new Promise((resolve, reject) => {
         const request = axios.get(`zones?name=${domain}&status=active&match=all`);
 
@@ -22,3 +27,5 @@ export const fetchZones = ({ domain }) => {
         });
     });
 }
+
+exports.fetchZones = fetchZones;

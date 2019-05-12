@@ -1,7 +1,7 @@
 /* Dependencies */
 const publicIp = require('public-ip');
 
-export const retrieveIPV4 = () => {
+const retrieveIPV4 = () => {
     return new Promise((resolve, reject) => {
         (async function getIP() {
             const ip = await publicIp.v4();
@@ -9,3 +9,5 @@ export const retrieveIPV4 = () => {
         }());
     });
 }
+
+exports.retrieveIPV4 = retrieveIPV4;

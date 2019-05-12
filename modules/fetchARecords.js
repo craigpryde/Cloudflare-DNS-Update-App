@@ -1,3 +1,8 @@
+/* Dependencies */
+const createAxios = require("./config").createAxios;
+
+const axios = createAxios();
+
 /**
  * Function used to return all A records for a zone.
  * * @param {Object} param0 - Object containing passed in values.
@@ -9,7 +14,7 @@
  * // Log out records
  * getRecords.then((records) => console.log(records));
  */
-export const fetchARecords = ({ zone }) => {
+const fetchARecords = ({ zone }) => {
     return new Promise((resolve, reject) => {
         const request = axios.get(`zones/${zone}/dns_records?type=A`);
 
@@ -23,3 +28,5 @@ export const fetchARecords = ({ zone }) => {
     });
     
 }
+
+exports.fetchARecords = fetchARecords;

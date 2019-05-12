@@ -1,4 +1,4 @@
-#Cloudflare DNS Update App
+# Cloudflare DNS Update App
 App developed to be used with the linux cron to sync A records of domains with a non-static IP. Combat's the DDNS issue's with ISP's.
 
 **Requirments**

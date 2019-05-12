@@ -1,5 +1,5 @@
 /* Dependencies */
-const createAxios = require("./config").createAxios;
+const createAxios = require("../config").createAxios;
 
 const axios = createAxios();
 

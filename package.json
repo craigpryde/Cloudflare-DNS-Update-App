@@ -23,7 +23,7 @@
     },
     "scripts": {},
     "dependencies": {
-      "axios": "0.18.0",
-      "public-ip": "3.0.0"
+        "axios": "^0.19.2",
+        "public-ip": "3.0.0"
     }
-  }
+}
